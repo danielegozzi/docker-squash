@@ -14,7 +14,7 @@ Understand that this program is not systematically verified besides not having o
 Usage:
 
 ```console
-$ docker-squash.sh NAME\[:TAG\]
+$ docker-squash.sh NAME[:TAG]
 ```
 
 Effect:
