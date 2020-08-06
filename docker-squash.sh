@@ -18,13 +18,13 @@ EXPOSE{{ range \$k, \$v := .Config.ExposedPorts }} {{ \$k }}{{end}}
 ONBUILD {{ . }}
 {{end}}{{end}}{{if .Config.User}}-c
 USER {{ .Config.User }}
-{{end}}{{if .Config.Volumes}}{{range .Config.Volumes}}-c
-VOLUME {{ . }}
+{{end}}{{if .Config.Volumes}}{{range \$k, \$v := .Config.Volumes}}-c
+VOLUME {{ \$k }}
 {{end}}{{end}}{{if .Config.WorkingDir}}-c
 WORKDIR {{ .Config.WorkingDir }}
 {{end}}" "$source_tag") )
 tmp_container="$(docker create "$source_tag")"
-trap "docker rm '$tmp_container'" EXIT
+trap "docker rm '$tmp_container' >/dev/null 2>&1" EXIT
 echo "Squashing ${source_tag} ($source_image_id) and overwriting the same tag. You will eventually have to prune the old dangling image." >&2
-docker export "$tmp_container" | docker import ${change_arg[@]} -m "Squashed from $source_image_id" - "${source_tag}"
+docker export "$tmp_container" | docker import ${change_arg[@]} -m "Squashed from $source_image_id" - "${source_tag}" >/dev/null 2>&1
 echo "$source_image_id"

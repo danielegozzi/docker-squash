@@ -7,7 +7,7 @@ Other implementations of the same concept being:
 * [jwilder/docker-squash](https://github.com/jwilder/docker-squash) in Go
 * [goldmann/docker-squash](https://github.com/goldmann/docker-squash) in Python
 
-**No tests for now**, but this works on my machine. This warning is meant for you: do not rely on a handful of bash lines written by strangers if there are no runnable automatic tests.
+One (1) lengthy overall (integration) test has been written validating one happy-path execution. If you plan to submit pull requests please extend the test code according to your fix.
 
 Understand that this program is not systematically verified besides not having obviously crapped on my image store.
 
